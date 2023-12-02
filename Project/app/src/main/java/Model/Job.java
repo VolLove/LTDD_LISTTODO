@@ -1,12 +1,13 @@
 package Model;
 
 public class Job {
-    String id, title,type_id,decription, date_create,deadline,rank,status,id_user;
+    String  title, decription, date_create, deadline;
+    int id,status, rank, type_id, id_user;
 
     public Job() {
     }
 
-    public Job(String id, String title, String type_id, String decription, String date_create, String deadline, String rank, String status, String id_user) {
+    public Job(int id, String title, int type_id, String decription, String date_create, String deadline, int rank, int status, int id_user) {
         this.id = id;
         this.title = title;
         this.type_id = type_id;
@@ -18,11 +19,11 @@ public class Job {
         this.id_user = id_user;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -34,11 +35,11 @@ public class Job {
         this.title = title;
     }
 
-    public String getType_id() {
+    public int getType_id() {
         return type_id;
     }
 
-    public void setType_id(String type_id) {
+    public void setType_id(int type_id) {
         this.type_id = type_id;
     }
 
@@ -66,27 +67,27 @@ public class Job {
         this.deadline = deadline;
     }
 
-    public String getRank() {
+    public int getRank() {
         return rank;
     }
 
-    public void setRank(String rank) {
+    public void setRank(int rank) {
         this.rank = rank;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
-    public String getId_user() {
+    public int getId_user() {
         return id_user;
     }
 
-    public void setId_user(String id_user) {
+    public void setId_user(int id_user) {
         this.id_user = id_user;
     }
 

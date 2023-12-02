@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/nav_home"
-        android:title="Trang chủ" />
+    <group
+        android:checkableBehavior="single"
+        android:visible="true">
+
+        <item
+            android:id="@+id/navhome"
+            android:icon="@drawable/baseline_home_24"
+            android:title="Trang chủ" />
+        <item
+            android:id="@+id/navtable"
+            android:icon="@drawable/baseline_table_rows_24"
+            android:title="Todo list" />
+
+        <item
+            android:id="@+id/navlogout"
+            android:icon="@drawable/baseline_logout_24"
+            android:title="Logout" />
+
+        <item
+            android:id="@+id/navclose"
+            android:icon="@drawable/baseline_close_24"
+            android:title="Close" />
+    </group>
 
 </menu>

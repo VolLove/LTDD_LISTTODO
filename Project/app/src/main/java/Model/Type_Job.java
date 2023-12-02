@@ -1,21 +1,22 @@
 package Model;
 
 public class Type_Job {
-    String id, title;
+    int id;
+    String  title;
 
     public Type_Job() {
     }
 
-    public Type_Job(String id, String title) {
+    public Type_Job(int id, String title) {
         this.id = id;
         this.title = title;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

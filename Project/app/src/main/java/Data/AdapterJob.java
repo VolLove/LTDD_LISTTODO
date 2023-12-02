@@ -1,2 +1,4 @@
-package Data;public class AdapterJob {
+package Data;
+
+public class AdapterJob {
 }
