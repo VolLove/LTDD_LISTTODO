@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -27,6 +28,7 @@ public class TableFragment extends Fragment {
 
         adapterJob = new AdapterJob(requireContext(), R.layout.item_adapter, MainActivity.db.getAllJobsSortedByStatusDescending(MainActivity.USER_ID));
         lv.setAdapter(adapterJob);
+
         return view;
     }
 

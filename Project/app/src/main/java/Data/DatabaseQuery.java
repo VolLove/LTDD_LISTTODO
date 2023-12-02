@@ -27,7 +27,7 @@ public class DatabaseQuery extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         // Tạo lại bảng Job với cấu trúc mới
-        String createJobTable = "CREATE TABLE Job (id INTEGER PRIMARY KEY, title TEXT, description TEXT, date_create TEXT, deadline TEXT, status INTEGER, rank INTEGER, type_id INTEGER, id_user INTEGER)";
+        String createJobTable = "CREATE TABLE Job (id INTEGER PRIMARY KEY, title TEXT, description TEXT, date_create TEXT,date_finish TEXT, deadline TEXT, status INTEGER, rank INTEGER, type_id INTEGER, id_user INTEGER)";
         sqLiteDatabase.execSQL(createJobTable);
 
         // Tạo lại bảng Type_Job với cấu trúc mới
@@ -47,13 +47,13 @@ public class DatabaseQuery extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO User (username, password) VALUES ('user2', 'password2')");
         sqLiteDatabase.execSQL("INSERT INTO User (username, password) VALUES ('user3', 'password3')");
 
-        sqLiteDatabase.execSQL("INSERT INTO Job (title, description, date_create, deadline, status, rank, type_id, id_user) VALUES ('Job 1', 'Description for Job 1', '2023-01-01 00:00:00', '2023-02-01 00:00:00', 0, 1, 1, 1)");
-        sqLiteDatabase.execSQL("INSERT INTO Job (title, description, date_create, deadline, status, rank, type_id, id_user) VALUES ('Job 2', 'Description for Job 2', '2023-02-01 00:00:00', '2023-03-01 00:00:00', 0, 0, 2, 2)");
-        sqLiteDatabase.execSQL("INSERT INTO Job (title, description, date_create, deadline, status, rank, type_id, id_user) VALUES ('Job 3', 'Description for Job 3', '2023-03-01 00:00:00', '2023-04-01 00:00:00', 0, 0, 3, 1)");
-        sqLiteDatabase.execSQL("INSERT INTO Job (title, description, date_create, deadline, status, rank, type_id, id_user) VALUES ('Job 4', 'Description for Job 4', '2023-03-01 00:00:00', '2023-04-01 00:00:00', 0, 0, 1, 3)");
-        sqLiteDatabase.execSQL("INSERT INTO Job (title, description, date_create, deadline, status, rank, type_id, id_user) VALUES ('Job 5', 'Description for Job 5', '2023-03-01 00:00:00', '2023-04-01 00:00:00', 0, 0, 2, 1)");
-        sqLiteDatabase.execSQL("INSERT INTO Job (title, description, date_create, deadline, status, rank, type_id, id_user) VALUES ('Job 6', 'Description for Job 6', '2023-03-01 00:00:00', '2023-04-01 00:00:00', 0, 0, 4, 1)");
-        sqLiteDatabase.execSQL("INSERT INTO Job (title, description, date_create, deadline, status, rank, type_id, id_user) VALUES ('Job 7', 'Description for Job 7', '2023-03-01 00:00:00', '2023-04-01 00:00:00', 0, 0, 1, 1)");
+        sqLiteDatabase.execSQL("INSERT INTO Job (title, description, date_create,date_finish, deadline, status, rank, type_id, id_user) VALUES ('Job 1', 'Description for Job 1', '2023-01-01 00:00:00',null, '2023-02-01 00:00:00', 0, 1, 1, 1)");
+        sqLiteDatabase.execSQL("INSERT INTO Job (title, description, date_create,date_finish, deadline, status, rank, type_id, id_user) VALUES ('Job 2', 'Description for Job 2', '2023-02-01 00:00:00',null, '2023-03-01 00:00:00', 0, 0, 2, 2)");
+        sqLiteDatabase.execSQL("INSERT INTO Job (title, description, date_create,date_finish, deadline, status, rank, type_id, id_user) VALUES ('Job 3', 'Description for Job 3', '2023-03-01 00:00:00',null, '2023-04-01 00:00:00', 0, 0, 3, 1)");
+        sqLiteDatabase.execSQL("INSERT INTO Job (title, description, date_create,date_finish, deadline, status, rank, type_id, id_user) VALUES ('Job 4', 'Description for Job 4', '2023-03-01 00:00:00',null, '2023-04-01 00:00:00', 0, 0, 1, 3)");
+        sqLiteDatabase.execSQL("INSERT INTO Job (title, description, date_create,date_finish, deadline, status, rank, type_id, id_user) VALUES ('Job 5', 'Description for Job 5', '2023-03-01 00:00:00',null, '2023-04-01 00:00:00', 0, 0, 2, 1)");
+        sqLiteDatabase.execSQL("INSERT INTO Job (title, description, date_create,date_finish, deadline, status, rank, type_id, id_user) VALUES ('Job 6', 'Description for Job 6', '2023-03-01 00:00:00',null, '2023-04-01 00:00:00', 0, 0, 4, 1)");
+        sqLiteDatabase.execSQL("INSERT INTO Job (title, description, date_create,date_finish, deadline, status, rank, type_id, id_user) VALUES ('Job 7', 'Description for Job 7', '2023-03-01 00:00:00',null, '2023-04-01 00:00:00', 0, 0, 1, 1)");
     }
 
     @Override
@@ -64,18 +64,10 @@ public class DatabaseQuery extends SQLiteOpenHelper {
     public void addJob(Job job) {
         db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-//        id
-//        title
-//        description
-//        date_create
-//        deadline
-//        status
-//        rank
-//        type_id
-//        id_user
         values.put("title", job.getTitle());
         values.put("description", job.getDecription());
         values.put("date_create", job.getDate_create());
+        values.put("date_finish", job.getDate_finish());
         values.put("deadline", job.getDeadline());
         values.put("status", job.getStatus());
         values.put("rank", job.getRank());
@@ -85,25 +77,40 @@ public class DatabaseQuery extends SQLiteOpenHelper {
         db.insert("Job", null, values);
     }
 
-    public ArrayList<Job> getAllJobs(int id) {
+    //    id INTEGER PRIMARY KEY,
+//    title TEXT,
+//    description TEXT,
+//    date_create TEXT,
+//    date_finish TEXT,
+//    deadline TEXT,
+//    status INTEGER,
+//    rank INTEGER,
+//    type_id INTEGER,
+//    id_user INTEGER
+    @SuppressLint("Range")
+    public ArrayList<Job> getAllJobs(int id_u) {
         ArrayList<Job> jobs = new ArrayList<>();
         db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM Job WHERE id_user=?", new String[]{String.valueOf(id)});
+        Cursor cursor = db.rawQuery("SELECT * FROM Job WHERE id_user=?", new String[]{String.valueOf(id_u)});
         if (cursor.moveToFirst()) {
             do {
-                Job job = new Job();
-                job.setId(cursor.getInt(0));
-                job.setTitle(cursor.getString(1));
-                job.setDecription(cursor.getString(2));
-                job.setDate_create(cursor.getString(3));
-                job.setDeadline(cursor.getString(4));
-                job.setStatus(cursor.getInt(5));
-                job.setRank(cursor.getInt(6));
-                job.setType_id(cursor.getInt(7));
-                job.setId_user(cursor.getInt(8));
+                // Lấy dữ liệu từ Cursor như trước
+                int id = cursor.getInt(cursor.getColumnIndex("id"));
+                String title = cursor.getString(cursor.getColumnIndex("title"));
+                String description = cursor.getString(cursor.getColumnIndex("description"));
+                String dateCreate = cursor.getString(cursor.getColumnIndex("date_create"));
+                String dateFinish = cursor.getString(cursor.getColumnIndex("date_finish"));
+                String deadline = cursor.getString(cursor.getColumnIndex("deadline"));
+                int status = cursor.getInt(cursor.getColumnIndex("status"));
+                int rank = cursor.getInt(cursor.getColumnIndex("rank"));
+                int typeId = cursor.getInt(cursor.getColumnIndex("type_id"));
+                int userId = cursor.getInt(cursor.getColumnIndex("id_user"));
+                // Tạo đối tượng Job từ dữ liệu từ cơ sở dữ liệu
+                Job job = new Job(id, title, typeId, description, dateCreate, dateFinish, deadline, rank, status, userId);
                 jobs.add(job);
             } while (cursor.moveToNext());
         }
+        cursor.close();
         return jobs;
     }
 
@@ -189,14 +196,14 @@ public class DatabaseQuery extends SQLiteOpenHelper {
                 String title = cursor.getString(cursor.getColumnIndex("title"));
                 String description = cursor.getString(cursor.getColumnIndex("description"));
                 String dateCreate = cursor.getString(cursor.getColumnIndex("date_create"));
+                String dateFinish = cursor.getString(cursor.getColumnIndex("date_finish"));
                 String deadline = cursor.getString(cursor.getColumnIndex("deadline"));
                 int status = cursor.getInt(cursor.getColumnIndex("status"));
                 int rank = cursor.getInt(cursor.getColumnIndex("rank"));
                 int typeId = cursor.getInt(cursor.getColumnIndex("type_id"));
                 int userId = cursor.getInt(cursor.getColumnIndex("id_user"));
-
                 // Tạo đối tượng Job từ dữ liệu từ cơ sở dữ liệu
-                Job job = new Job(id, title, typeId, description, dateCreate, deadline, rank, status, userId);
+                Job job = new Job(id, title, typeId, description, dateCreate, dateFinish, deadline, rank, status, userId);
                 jobs.add(job);
             } while (cursor.moveToNext());
         }
@@ -212,6 +219,7 @@ public class DatabaseQuery extends SQLiteOpenHelper {
         values.put("title", job.getTitle());
         values.put("description", job.getDecription());
         values.put("date_create", job.getDate_create());
+        values.put("date_finish", job.getDate_finish());
         values.put("deadline", job.getDeadline());
         values.put("status", job.getStatus());
         values.put("rank", job.getRank());
@@ -219,6 +227,7 @@ public class DatabaseQuery extends SQLiteOpenHelper {
         values.put("id_user", job.getId_user());
         db.update("Job", values, "id=?", new String[]{String.valueOf(job.getId())});
     }
+
     @SuppressLint("Range")
     public Job getJobById(int jobId) {
         db = this.getReadableDatabase();
@@ -230,6 +239,7 @@ public class DatabaseQuery extends SQLiteOpenHelper {
             String title = cursor.getString(cursor.getColumnIndex("title"));
             String description = cursor.getString(cursor.getColumnIndex("description"));
             String dateCreate = cursor.getString(cursor.getColumnIndex("date_create"));
+            String dateFinish = cursor.getString(cursor.getColumnIndex("date_finish"));
             String deadline = cursor.getString(cursor.getColumnIndex("deadline"));
             int status = cursor.getInt(cursor.getColumnIndex("status"));
             int rank = cursor.getInt(cursor.getColumnIndex("rank"));
@@ -237,11 +247,22 @@ public class DatabaseQuery extends SQLiteOpenHelper {
             int userId = cursor.getInt(cursor.getColumnIndex("id_user"));
 
             // Tạo đối tượng Job từ dữ liệu từ cơ sở dữ liệu
-            job = new Job(jobId, title,typeId,description, dateCreate,deadline,rank,status,userId);
+            job = new Job(jobId, title, typeId, description, dateCreate, dateFinish, deadline, rank, status, userId);
 
         }
 
         cursor.close();
         return job;
+    }
+
+    @SuppressLint("Range")
+    public String getTypeById(int typeId) {
+        db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT title FROM Type_Job WHERE id = ?", new String[]{String.valueOf(typeId)});
+        String x = null;
+        if (cursor.moveToFirst()) {
+            x = cursor.getString(cursor.getColumnIndex("title"));
+        }
+        return x;
     }
 }

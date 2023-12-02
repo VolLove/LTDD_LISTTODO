@@ -1,19 +1,28 @@
 package Model;
 
 public class Job {
-    String  title, decription, date_create, deadline;
+    String  title, decription, date_create, deadline,date_finish;
     int id,status, rank, type_id, id_user;
+
+    public String getDate_finish() {
+        return date_finish;
+    }
+
+    public void setDate_finish(String date_finish) {
+        this.date_finish = date_finish;
+    }
 
     public Job() {
     }
 
-    public Job(int id, String title, int type_id, String decription, String date_create, String deadline, int rank, int status, int id_user) {
+    public Job(int id, String title, int type_id, String decription, String date_create,String date_finish, String deadline, int rank, int status, int id_user ) {
         this.id = id;
         this.title = title;
         this.type_id = type_id;
         this.decription = decription;
         this.date_create = date_create;
         this.deadline = deadline;
+        this.date_finish = date_finish;
         this.rank = rank;
         this.status = status;
         this.id_user = id_user;
