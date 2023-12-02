@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.myapplication.DetailFragment;
+import com.example.myapplication.EditFragment;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.TableFragment;
@@ -110,7 +111,16 @@ public class AdapterJob extends ArrayAdapter {
         ibtnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("key", job.getId());
+                EditFragment fragment = new EditFragment();
+                fragment.setArguments(bundle);
 
+                FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.mainFragment, fragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
         rank.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
