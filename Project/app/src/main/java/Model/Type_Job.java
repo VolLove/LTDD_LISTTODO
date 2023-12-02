@@ -30,6 +30,6 @@ public class Type_Job {
 
     @Override
     public String toString() {
-        return title ;
+        return  title;
     }
 }

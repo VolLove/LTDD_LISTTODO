@@ -22,8 +22,12 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+
+import Data.DatabaseQuery;
+import Model.Job;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static Toolbar toolbar;
@@ -31,6 +35,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static ImageButton btnCreate;
     public static int indext = 0;
     public static int USER_ID = 1;
+    public static ArrayList<Job> jobs;
+    public static DatabaseQuery db;
     DrawerLayout drawerLayout;
 
     @Override
@@ -42,9 +48,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void setEvent() {
-        Intent intent = getIntent();
-        USER_ID = intent.getIntExtra("id", 0);
+//        Intent intent = getIntent();
+//        USER_ID = intent.getIntExtra("id", 0);
         setSupportActionBar(toolbar);
+        db = new DatabaseQuery(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.close_nav, R.string.open_nav);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
