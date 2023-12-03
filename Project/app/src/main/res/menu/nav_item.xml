@@ -16,7 +16,10 @@
             android:id="@+id/navtableType"
             android:icon="@drawable/baseline_table_rows_24"
             android:title="Type list" />
-
+        <item
+            android:id="@+id/navThongKe"
+            android:icon="@drawable/baseline_insert_chart_outlined_24"
+            android:title="Thống kê" />
         <item
             android:id="@+id/navlogout"
             android:icon="@drawable/baseline_logout_24"

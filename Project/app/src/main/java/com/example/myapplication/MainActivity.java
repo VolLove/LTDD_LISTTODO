@@ -95,6 +95,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.navtableType) {
             change(new TableTypeFragment());
         }
+        if (id == R.id.navThongKe) {
+            change(new ThongKeFragment());
+        }
         if (id == R.id.navlogout) {
             Intent intent = new Intent(MainActivity.this, MainActivity2.class);
             startActivity(intent);

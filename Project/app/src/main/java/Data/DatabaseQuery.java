@@ -43,6 +43,7 @@ public class DatabaseQuery extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO Type_Job (title) VALUES ('Type 2')");
         sqLiteDatabase.execSQL("INSERT INTO Type_Job (title) VALUES ('Type 3')");
 
+        sqLiteDatabase.execSQL("INSERT INTO User (username, password) VALUES ('user', 'user')");
         sqLiteDatabase.execSQL("INSERT INTO User (username, password) VALUES ('user1', 'password1')");
         sqLiteDatabase.execSQL("INSERT INTO User (username, password) VALUES ('user2', 'password2')");
         sqLiteDatabase.execSQL("INSERT INTO User (username, password) VALUES ('user3', 'password3')");
@@ -171,7 +172,7 @@ public class DatabaseQuery extends SQLiteOpenHelper {
         db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put("title",typeJob.getTitle());
+        values.put("title", typeJob.getTitle());
 
         db.update("Type_Job", values, "id=?", new String[]{String.valueOf(typeJob.getId())});
 
@@ -265,5 +266,44 @@ public class DatabaseQuery extends SQLiteOpenHelper {
             typeJob.setId(cursor.getInt(cursor.getColumnIndex("id")));
         }
         return typeJob;
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<Job> getJobsByStatus(int status) {
+        ArrayList<Job> jobList = new ArrayList<>();
+        db = this.getReadableDatabase();
+
+        String[] columns = {"id", "title", "description", "date_create", "date_finish", "deadline", "status", "rank", "type_id", "id_user"};
+        String selection = "status = ?";
+        String[] selectionArgs = {String.valueOf(status)};
+
+        Cursor cursor = db.query("Job", columns, selection, selectionArgs, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                // Lấy dữ liệu từ Cursor như trước
+                int id = cursor.getInt(cursor.getColumnIndex("id"));
+                String title = cursor.getString(cursor.getColumnIndex("title"));
+                String description = cursor.getString(cursor.getColumnIndex("description"));
+                String dateCreate = cursor.getString(cursor.getColumnIndex("date_create"));
+                String dateFinish = cursor.getString(cursor.getColumnIndex("date_finish"));
+                String deadline = cursor.getString(cursor.getColumnIndex("deadline"));
+                int status1 = cursor.getInt(cursor.getColumnIndex("status"));
+                int rank = cursor.getInt(cursor.getColumnIndex("rank"));
+                int typeId = cursor.getInt(cursor.getColumnIndex("type_id"));
+                int userId = cursor.getInt(cursor.getColumnIndex("id_user"));
+                // Tạo đối tượng Job từ dữ liệu từ cơ sở dữ liệu
+                Job job = new Job(id, title, typeId, description, dateCreate, dateFinish, deadline, rank, status1, userId);
+                jobList.add(job);
+            } while (cursor.moveToNext());
+
+            // Đóng Cursor sau khi sử dụng xong
+            cursor.close();
+        }
+
+        // Đóng kết nối đến cơ sở dữ liệu
+        db.close();
+
+        return jobList;
     }
 }

@@ -58,7 +58,7 @@ public class DetailFragment extends Fragment {
         } else {
             button.setVisibility(View.GONE);
             linearLayout.setVisibility(View.GONE);
-            tvStart.setText("Late");
+            tvStart.setText("Out date");
         }
         tvTitle.setText(job.getTitle());
         tvDeadline.setText(job.getDeadline());
