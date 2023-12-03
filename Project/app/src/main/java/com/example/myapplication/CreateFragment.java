@@ -43,6 +43,7 @@ public class CreateFragment extends Fragment {
         buttonSelectDateTime = view.findViewById(R.id.buttonSelectDateTime);
         editTextDeadline = view.findViewById(R.id.editTextDeadline);
         buttonSave = view.findViewById(R.id.buttonSave);
+        Button btnClose = view.findViewById(R.id.buttonClose);
         calendar = Calendar.getInstance();
         ArrayList<Type_Job> typeJobs = MainActivity.db.getAllTypeJobs();
         ArrayAdapter<Type_Job> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, typeJobs);
@@ -74,7 +75,13 @@ public class CreateFragment extends Fragment {
                 datePickerDialog.show();
             }
         });
-
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.popBackStack();
+            }
+        });
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

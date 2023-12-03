@@ -21,8 +21,8 @@ public class TableTypeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_table_type, container, false);
-        MainActivity.btnCreate.setVisibility(View.GONE);
-        MainActivity.indext = 0;
+        MainActivity.btnCreate.setVisibility(View.VISIBLE);
+        MainActivity.indext = 2;
         lv = view.findViewById(R.id.lvTB);
         adapterTypeJob = new AdapterTypeJob(requireContext(),R.layout.item_adapter_type,MainActivity.db.getAllTypeJobs());
         lv.setAdapter(adapterTypeJob);
