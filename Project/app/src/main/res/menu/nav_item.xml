@@ -12,6 +12,10 @@
             android:id="@+id/navtable"
             android:icon="@drawable/baseline_table_rows_24"
             android:title="Todo list" />
+        <item
+            android:id="@+id/navtableType"
+            android:icon="@drawable/baseline_table_rows_24"
+            android:title="Type list" />
 
         <item
             android:id="@+id/navlogout"

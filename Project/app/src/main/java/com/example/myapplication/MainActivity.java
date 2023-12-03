@@ -68,7 +68,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (indext == 1) {
                     change(new CreateFragment());
                 }
-
+                if (indext == 2) {
+                    change(new CreateTypeFragment());
+                }
             }
         });
     }
@@ -88,6 +90,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         if (id == R.id.navtable) {
             change(new TableFragment());
+        }
+
+        if (id == R.id.navtableType) {
+            change(new TableTypeFragment());
+        }
+        if (id == R.id.navlogout) {
+            Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+            startActivity(intent);
+            finish();
         }
         if (id == R.id.navclose) {
             finish();

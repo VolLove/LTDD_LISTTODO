@@ -167,13 +167,13 @@ public class DatabaseQuery extends SQLiteOpenHelper {
         return typeJobs;
     }
 
-    public void updateTypeJob(int id, String newTitle) {
+    public void updateTypeJob(Type_Job typeJob) {
         db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put("title", newTitle);
+        values.put("title",typeJob.getTitle());
 
-        db.update("Type_Job", values, "id=?", new String[]{String.valueOf(id)});
+        db.update("Type_Job", values, "id=?", new String[]{String.valueOf(typeJob.getId())});
 
     }
 
@@ -256,13 +256,14 @@ public class DatabaseQuery extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Range")
-    public String getTypeById(int typeId) {
+    public Type_Job getTypeById(int typeId) {
         db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT title FROM Type_Job WHERE id = ?", new String[]{String.valueOf(typeId)});
-        String x = null;
+        Cursor cursor = db.rawQuery("SELECT * FROM Type_Job WHERE id = ?", new String[]{String.valueOf(typeId)});
+        Type_Job typeJob = new Type_Job();
         if (cursor.moveToFirst()) {
-            x = cursor.getString(cursor.getColumnIndex("title"));
+            typeJob.setTitle(cursor.getString(cursor.getColumnIndex("title")));
+            typeJob.setId(cursor.getInt(cursor.getColumnIndex("id")));
         }
-        return x;
+        return typeJob;
     }
 }

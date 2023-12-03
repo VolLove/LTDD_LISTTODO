@@ -62,7 +62,7 @@ public class DetailFragment extends Fragment {
         }
         tvTitle.setText(job.getTitle());
         tvDeadline.setText(job.getDeadline());
-        tvType.setText(MainActivity.db.getTypeById(job.getType_id()));
+        tvType.setText(MainActivity.db.getTypeById(job.getType_id()).getTitle());
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
