@@ -26,9 +26,13 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+
         MainActivity.btnCreate.setVisibility(View.GONE);
         MainActivity.indext = 0;
         ListView listView = view.findViewById(R.id.lvTB);
+
+
         ArrayList<Job> jobs1 = MainActivity.db.getAllJobs(MainActivity.USER_ID);
         Calendar calendar = Calendar.getInstance();
         Date currentDate = calendar.getTime();

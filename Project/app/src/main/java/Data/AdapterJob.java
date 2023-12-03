@@ -76,7 +76,6 @@ public class AdapterJob extends ArrayAdapter {
                         .setPositiveButton("Hủy bỏ", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-
                             }
                         })
                         .setNegativeButton("Đồng ý", new DialogInterface.OnClickListener() {
@@ -86,7 +85,6 @@ public class AdapterJob extends ArrayAdapter {
                                 // Load lại danh sách công việc
                                 setData(MainActivity.db.getAllJobsSortedByStatusDescending(MainActivity.USER_ID));
                                 notifyDataSetChanged();
-
                             }
                         });
                 AlertDialog dialog = builder.create();

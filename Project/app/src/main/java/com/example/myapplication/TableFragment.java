@@ -25,7 +25,6 @@ public class TableFragment extends Fragment {
         MainActivity.indext = 1;
 
         lv = view.findViewById(R.id.lvTable);
-
         adapterJob = new AdapterJob(requireContext(), R.layout.item_adapter, MainActivity.db.getAllJobsSortedByStatusDescending(MainActivity.USER_ID));
         lv.setAdapter(adapterJob);
 

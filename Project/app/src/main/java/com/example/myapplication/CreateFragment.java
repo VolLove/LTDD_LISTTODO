@@ -112,14 +112,15 @@ public class CreateFragment extends Fragment {
                 job.setId_user(MainActivity.USER_ID);
                 job.setDecription(description);
                 job.setTitle(title);
+                //save
                 MainActivity.db.addJob(job);
+
                 TableFragment fragment = new TableFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.mainFragment, fragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
-                // Hiển thị thông báo hoặc chuyển đến màn hình khác sau khi lưu
 
             }
         });

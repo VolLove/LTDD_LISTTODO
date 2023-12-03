@@ -23,8 +23,8 @@ public class Job {
         this.date_create = date_create;
         this.deadline = deadline;
         this.date_finish = date_finish;
-        this.rank = rank;
-        this.status = status;
+        this.rank = rank;//0 bình thường 1 ưu tiên
+        this.status = status;//0 là dang tiến hành 1 hoàn thành 2 quá hạn
         this.id_user = id_user;
     }
 

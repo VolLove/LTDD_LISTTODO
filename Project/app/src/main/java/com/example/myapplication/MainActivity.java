@@ -51,17 +51,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void setEvent() {
         Intent intent = getIntent();
-        USER_ID = intent.getIntExtra("id", 1);
+        USER_ID = intent.getIntExtra("id", 0);
         setSupportActionBar(toolbar);
         db = new DatabaseQuery(this);
-
-
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.close_nav, R.string.open_nav);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         nav.setNavigationItemSelectedListener(this);
         change(new HomeFragment());
         btnCreate.setVisibility(View.GONE);
+
+
+
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

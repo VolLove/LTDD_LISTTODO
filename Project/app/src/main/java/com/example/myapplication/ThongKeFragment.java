@@ -22,18 +22,22 @@ public class ThongKeFragment extends Fragment {
         TextView tv2 = view.findViewById(R.id.tvCollum2);
         TextView tv3 = view.findViewById(R.id.tvCollum3);
         int tong = MainActivity.db.getAllJobs(MainActivity.USER_ID).size();
+
         int start1 = MainActivity.db.getJobsByStatus(0).size();
-        int h1 = 2000 * start1 / tong;
+        int h1 = 2000 *start1 / tong;
         tv1.setText(String.valueOf(start1));
         tv1.setHeight(h1);
+
         int start2 = MainActivity.db.getJobsByStatus(1).size();
         int h2 = 2000 * start2 / tong;
         tv2.setText(String.valueOf(start2));
         tv2.setHeight(h2);
+
         int start3 = MainActivity.db.getJobsByStatus(2).size();
         int h3 = 2000 * start3 / tong;
         tv3.setText(String.valueOf(start3));
         tv3.setHeight(h3);
+
         return view;
     }
 }

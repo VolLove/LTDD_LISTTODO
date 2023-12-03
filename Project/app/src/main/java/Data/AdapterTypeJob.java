@@ -57,11 +57,12 @@ public class AdapterTypeJob extends ArrayAdapter {
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //lấy id truyền vào fragment
                 Bundle bundle = new Bundle();
                 bundle.putInt("key", typeJob.getId());
                 EditTypeFragment fragment = new EditTypeFragment();
                 fragment.setArguments(bundle);
-
+                //
                 FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.mainFragment, fragment);
@@ -77,13 +78,11 @@ public class AdapterTypeJob extends ArrayAdapter {
                         .setPositiveButton("Hủy bỏ", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-
                             }
                         })
                         .setNegativeButton("Đồng ý", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-
                                 MainActivity.db.deleteTypeJob(typeJob.getId());
                                 setData(MainActivity.db.getAllTypeJobs());
                                 notifyDataSetChanged();
